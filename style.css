@@ -1,0 +1,86 @@
+
+.body{
+    background: black;
+}
+#imageCanvas {
+
+    margin-left: 1%;
+    margin-right: none;
+    margin-top:2%;
+    display: block;
+    width: 98%;
+    height: 100%;
+    background: red;
+
+}
+#editCanvas {
+
+    margin-left: 1%;
+    margin-right: none;
+    margin-top:1%;
+    display: block;
+    width: 98%;
+    height: 100%;
+    background: orange;
+
+}
+
+
+#imageLoader{
+
+}
+/*SELECT IMAGE BUTTON*/
+/*Copied from bootstrap */
+.btn {
+    display: inline-block;
+    padding: 3px 6px;
+    margin-bottom: 0;
+    font-size: 50px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left: 1%;
+}
+ .btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+}
+ .fileinput-button input {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter:'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+}
+#newImage{
+    
+    margin-top: 10%;
+    visibility: hidden;
+}
+#SelectImageDiv{
+    position:relative;
+   margin-left: 1%;
+}
+
+
+

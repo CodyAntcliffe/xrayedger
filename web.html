@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>X-Ray Edge Detection</title>
+	<meta charset='utf-8'></meta>
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src: "jsfeat.js"> </script>
+	<script type="text/javascript" src: "jsfeat_bbf.js"> </script>
+	<script type="text/javascript" src: "jsfeat_cache.js"> </script>
+	<script type="text/javascript" src: "jsfeat_export.js"> </script>
+	<script type="text/javascript" src: "jsfeat_fast_corners.js"> </script>
+	<script type="text/javascript" src: "jsfeat_haar.js"> </script>
+	<script type="text/javascript" src: "jsfeat_imgproc.js"> </script>
+	<script type="text/javascript" src: "jsfeat_linalg.js"> </script>
+	<script type="text/javascript" src: "jsfeat_mat_math.js"> </script>
+	<script type="text/javascript" src: "jsfeat_math.js"> </script>
+	<script type="text/javascript" src: "jsfeat_bbf.js"> </script>
+
+	<script type="text/javascript" src: "jsfeat_motion_estimator"> </script>
+	<script type="text/javascript" src: "jsfeat_optical_flow_lk.js"> </script>
+	<script type="text/javascript" src: "jsfeat_orb.js"> </script>
+	<script type="text/javascript" src: "jsfeat_struct.js"> </script>
+	<script type="text/javascript" src: "jsfeat_transform.js"> </script>
+	<script type="text/javascript" src: "jsfeat_yape.js"> </script>
+	<script type="text/javascript" src: "jsfeat_yape06.js"> </script>
+	<script type="text/javascript" src: "jsfeat-min.js"> </script>
+
+</head>
+<body bgcolor="black">
+	
+<!--
+	Create the Image Select button 
+-->
+<div id="TEST">
+	<span class="btn btn-success fileinput-button">
+		<span>Select Image</span>
+		<input type="file" id='imageLoader' name="imageLoader" >
+	</span>
+</div>
+
+<div id="canvasDiv" >
+	<canvas id="imageCanvas"></canvas>
+	<canvas id="editCanvas"></canvas>
+</div>
+
+
+<div id="newImage">
+<button type="button" id='newImageBut' name="newImageBut" onclick="addNewImageButton()">>Click Me!</button>
+	
+</div>
+
+
+<script src="main.js"></script>
+
+</body>
+</html>
+
+
+
+
