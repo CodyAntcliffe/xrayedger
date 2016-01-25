@@ -37,19 +37,9 @@ function removeDummy() {
 
 }
 
-//Reloads the entire
+//Reloads the entire page
 function addNewImageButton() {
 
  location.reload();
 
-}
-
-
-function toGray(){
-
-    var image_data = ctxy.getImageData(0,0,640,480);
-    var gray_img = new jsfeat.matrix_t(ctxy.width, ctxy.height, jsfeat.U8_t | jsfeat.C1_t);
-    var code = jsfeat.COLOR.RGBA2GRAY;
-    jsfeat.imgproc.grayscale(image_data.data,ctxy.width,ctxy.height, gray_img, code);
-    ctx.drawImage(image_data);
 }
