@@ -11,6 +11,7 @@
     width: 98%;
     height: 100%;
     background: red;
+    visibility: hidden;
 
 }
 #editCanvas {
@@ -22,55 +23,52 @@
     width: 98%;
     height: 100%;
     background: orange;
+    visibility:hidden;
 
 }
 
 
-#imageLoader{
+#uploadImage{
+     background-color:red;
+    color:white;
+    border-width:5px;
+    border-style:solid;
+    border-radius:5px;
+    text-align:center;
+    background: #494949 ;
+    cursor: pointer;
+    width:30%;
+    height: 20%;
+    font-size: 50px;
+    margin-left:30%;
+    margin-top:20%;
+
 
 }
 /*SELECT IMAGE BUTTON*/
 /*Copied from bootstrap */
-.btn {
-    display: inline-block;
-    padding: 3px 6px;
-    margin-bottom: 0;
-    font-size: 50px;
-    font-weight: normal;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    margin-left: 1%;
-}
  .btn-success {
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
+
 }
 .fileinput-button {
     position: relative;
     overflow: hidden;
 }
  .fileinput-button input {
-
     position: absolute;
     top: 0;
     right: 0;
     margin: 0;
     opacity: 0;
     -ms-filter:'alpha(opacity=0)';
-    font-size: 200px;
+    font-size: 30px;
     direction: ltr;
     cursor: pointer;
+    width:100%;
+    height:100%;
 }
 #newImage{
     
@@ -79,8 +77,61 @@
 }
 #SelectImageDiv{
     position:relative;
-   margin-left: 1%;
 }
 
+
+.myButton {
+     display: block;
+    -moz-box-shadow: 0px 10px 14px -7px #3e7327;
+    -webkit-box-shadow: 0px 10px 14px -7px #3e7327;
+    box-shadow: 0px 10px 14px -7px #3e7327;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77b55a), color-stop(1, #72b352));
+    background:-moz-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:-webkit-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:-o-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:-ms-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77b55a', endColorstr='#72b352',GradientType=0);
+    background-color:#77b55a;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    border:1px solid #4b8f29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:13px;
+    font-weight:bold;
+
+   
+    text-decoration:none;
+    text-shadow:0px 1px 0px #5b8a3c;
+
+}
+.myButton:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #72b352), color-stop(1, #77b55a));
+    background:-moz-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:-webkit-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:-o-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:-ms-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#72b352', endColorstr='#77b55a',GradientType=0);
+    background-color:#72b352;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
+#EdgeButton, #Compare, #Save{
+    visibility: hidden;
+    width:10%;
+    height:10%;
+    font-size:25px;
+    font-weight:bold;
+    padding:6px 20px;
+    text-align:left;
+}
 
 
