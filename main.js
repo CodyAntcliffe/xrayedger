@@ -40,6 +40,5 @@ function removeDummy() {
 //Reloads the entire page
 function addNewImageButton() {
 
- location.reload();
-
+document.location.href = "index.html";
 }
