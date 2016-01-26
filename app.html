@@ -3,7 +3,14 @@
 <head>
 	<title>X-Ray Edge Detection</title>
 	<meta charset='utf-8'></meta>
-	<link rel="stylesheet" href="style.css">
+	
+	
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+   
+    <link href="style.css" rel = "stylesheet">
 	<script type="text/javascript" src: "jsfeat/jsfeat.js"> </script>
 	<script type="text/javascript" src: "jsfeat/jsfeat_bbf.js"> </script>
 	<script type="text/javascript" src: "jsfeat/jsfeat_cache.js"> </script>
@@ -23,17 +30,19 @@
 	<script type="text/javascript" src: "jsfeat/jsfeat_yape.js"> </script>
 	<script type="text/javascript" src: "jsfeat/jsfeat_yape06.js"> </script>
 	<script type="text/javascript" src: "jsfeat/jsfeat-min.js"> </script>
-
+	
 </head>
-<body bgcolor="#333">
+<body >
 	
 <!--
 	Create the Image Select button 
 -->
 <div id="Controls">
-	<a id="EdgeButton" href="#" class="myButton">Edge</a>
-	<a id="Save"  href="#" class="myButton">Save</a>
-	<a id="Compare" href="#" class="myButton">Compare</a>
+	   <button id="EdgeButton" type="button" class="btn btn-lg btn-primary">Edge</button>
+       <button  id="Compare"  type="button" class="btn btn-lg btn-primary">Compare</button>
+       <button id="Zoom" type="button" class="btn btn-lg btn-primary">Zoom</button>
+       <button id="Save" type="button" class="btn btn-lg btn-primary">Save</button>
+       <button id="newImage" type="button" class="btn btn-lg btn-primary">New</button>
 </div>
 
 
@@ -46,12 +55,6 @@
 <div id="canvasDiv" >
 	<canvas id="imageCanvas"></canvas>
 	<canvas id="editCanvas"></canvas>
-</div>
-
-
-<div id="newImage">
-<button type="button" id='newImageBut' name="newImageBut" onclick="addNewImageButton()">>Click Me!</button>
-	
 </div>
 
 

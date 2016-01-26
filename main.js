@@ -45,15 +45,17 @@ function removeDummy() {
     elem.style.visibility = "visible";
     elem = document.getElementById('Compare');
     elem.style.visibility = "visible";
+    elem = document.getElementById('Zoom');
+    elem.style.visibility = "visible";
+ 
 
 }
 
 //Reloads the entire page
 function addNewImageButton() {
 
-<<<<<<< HEAD
 document.location.href = "index.html";
-=======
+
     location.reload();
 
 }
@@ -70,9 +72,10 @@ function compareImage() {
         elem.style.visibility = "hidden";
 }
 
+
 //Save function
 var saveAs = function() {
-    var fileName = prompt("Enter A File Name and Press OK to Save", "myPicture");
+    var fileName = "X-RayEdgerDemo";
     if (fileName != null) {
         var img = canvas.toDataURL("image/png");
         var a = document.createElement('a');
@@ -82,6 +85,6 @@ var saveAs = function() {
         a.click();
         document.body.removeChild(a);
     }
->>>>>>> origin/master
+
 }
 document.getElementById('Save').addEventListener('click', saveAs, false);
