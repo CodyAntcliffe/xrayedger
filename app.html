@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>X-Ray Edge Detection</title>
+	<meta charset='utf-8'></meta>
+	
+	
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+   
+    <link href="style.css" rel = "stylesheet">
+	<script type="text/javascript" src: "js/jsfeat.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_bbf.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_cache.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_export.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_fast_corners.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_haar.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_imgproc.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_linalg.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_mat_math.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_math.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_bbf.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_motion_estimator"> </script>
+	<script type="text/javascript" src: "js/jsfeat_optical_flow_lk.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_orb.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_struct.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_transform.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_yape.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat_yape06.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat-min.js"> </script>
+	
+</head>
+<body >
+	
+<!--
+	Create the Image Select button 
+-->
+<div id="Controls">
+	   <button id="EdgeButton" type="button" class="btn btn-lg btn-primary">Edge</button>
+       <button  id="Compare"  type="button" class="btn btn-lg btn-primary">Compare</button>
+       <button id="Zoom" type="button" class="btn btn-lg btn-primary">Zoom</button>
+       <button id="Save" type="button" class="btn btn-lg btn-primary">Save</button>
+       <button id="newImage" type="button" class="btn btn-lg btn-primary">New</button>
+</div>
+
+
+
+<span id="uploadImage" class="myButton btn-success fileinput-button">
+		<span>Select Image</span>
+		<input type="file" id='imageLoader' name="imageLoader" >
+</span>
+
+<div id="canvasDiv" >
+	<canvas id="imageCanvas"></canvas>
+	<canvas id="editCanvas"></canvas>
+</div>
+
+	<script src="main.js"></script>
+	<script type="text/javascript" src= "js/jsfeat/jsfeat.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_bbf.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_cache.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_export.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_fast_corners.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_haar.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_imgproc.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_linalg.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_mat_math.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_math.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_bbf.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_motion_estimator"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_optical_flow_lk.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_orb.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_struct.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_transform.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_yape.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat_yape06.js"> </script>
+	<script type="text/javascript" src: "js/jsfeat/jsfeat-min.js"> </script>
+
+</body>
+</html>
+
+
+
+
