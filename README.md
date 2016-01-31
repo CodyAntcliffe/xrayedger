@@ -1,9 +1,10 @@
 # Fracture Identification and Analysis using Edge Detection on an X-Ray Image
 #Try it out! http://codyantcliffe.github.io/XRayEdger/
 
-    Through the use of edge detection methods, we hope to be able to easily identify fractures and breaks by reducing an x-ray image to a format similar to a vectorized image.
+Instantly get the outline of any image!  
 
-We will feed an X-Ray image into a Javascript program which implements the following features:
+Although this works with any image, I figured that it would be really practical/helpful if it was used for X-Ray images.  
+
 Edge detection, which can be used to determine irregularities
 Bone separation distance/area
 Break/fracture severity analysis
