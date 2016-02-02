@@ -1,5 +1,5 @@
 # Fracture Identification and Analysis using Edge Detection on an X-Ray Image
-#Try it out! http://codyantcliffe.github.io/XRayEdger/
+#Try it out! http://codyantcliffe.github.io/xrayedger/
 
 Instantly get the outline of any image!  
 
