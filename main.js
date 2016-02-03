@@ -89,28 +89,46 @@ var saveAs = function() {
 }
 document.getElementById('Save').addEventListener('click', saveAs, false);
 
-
-function detectFeatures(){
+function detectFeatures(b,l,h){
+    document.getElementById('ranges').style.visibility="visible";
+   
     //Get the dimensions of the photo currently on the canvas
     var width = canvas.width; 
     var height = canvas.height;
 
     var data_type = jsfeat.U8_t | jsfeat.C1_t;
     var img = originalImage;
-    
-    ctx.drawImage(img, 0, 0, width, height);
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+    ctx.drawImage(img, 0, 0);
 
     var data_buffer = new jsfeat.data_t(width*height);
     var img_u8 = new jsfeat.matrix_t(width, height, data_type, data_buffer);
     var imageData = ctx.getImageData(0, 0, width, height);
+    console.log(imageData);
 
     //Convert to grascale(needed for other methods)
     jsfeat.imgproc.grayscale(imageData.data, width, height, img_u8);
 
     //Control level of detail in edge detection
-    var blurLevel = 2;
-    var lowThreshold = 20;
-    var highThreshhold = 70;
+
+    var blurLevel;
+    var lowThreshold;
+    var highThreshhold;
+
+    if(b == undefined)
+        blurLevel = 2;
+    else
+        blurLebel = b;
+    if(l == undefined)
+        lowThreshold = 40;
+    else
+        lowThreshold = l;
+    if(h == undefined)
+        highThreshhold = 100;
+    else
+        highThreshhold = h;
+
+
 
     //Gaussian Blur to reduce noise
     var r = blurLevel|0;
@@ -131,10 +149,11 @@ function detectFeatures(){
 
     //Put the edited image on the canvas
     ctx.putImageData(imageData, 0, 0);
-
 }
 
-document.getElementById('EdgeButton').addEventListener('click',detectFeatures,false);
+
+
+//document.getElementById('EdgeButton').addEventListener('click',detectFeatures,false);
 
 //TODO
 /*
@@ -151,3 +170,4 @@ Zoom ability.
 Cropping?
 
 */
+

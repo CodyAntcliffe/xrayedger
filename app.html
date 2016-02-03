@@ -11,6 +11,7 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
    
     <link href="style.css" rel = "stylesheet">
+    <link href="slider/css/slider.css" rel = "stylesheet">
 	<script type="text/javascript" src: "js/jsfeat.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat_bbf.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat_cache.js"> </script>
@@ -30,6 +31,7 @@
 	<script type="text/javascript" src: "js/jsfeat_yape.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat_yape06.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat-min.js"> </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	
 </head>
 <body >
@@ -38,12 +40,18 @@
 	Create the Image Select button 
 -->
 <div id="Controls">
-	   <button id="EdgeButton" type="button" class="btn btn-lg btn-primary">Edge</button>
-       <button  id="Compare"  type="button" class="btn btn-lg btn-primary">Compare</button>
-       <button id="Zoom" type="button" class="btn btn-lg btn-primary">Zoom</button>
-       <button id="Save" type="button" class="btn btn-lg btn-primary">Save</button>
-       <button id="newImage" type="button" class="btn btn-lg btn-primary">New</button>
+	   <button title="Reduce Image to Edges" id="EdgeButton" type="button" class="btn btn-lg btn-primary" onclick="detectFeatures(gBlur.value,lowThresh.value,highThresh.value)" >Edge </button>
+       <button title="Toggle Original Image"  id="Compare"  type="button" class="btn btn-lg btn-primary">Compare</button>
+       <button title="Zoom in(out)" id="Zoom" type="button" class="btn btn-lg btn-primary">Zoom</button>
+       <button title="Save Edited Image" id="Save" type="button" class="btn btn-lg btn-primary">Save</button>
+       <button title="Select A New Image" id="newImage" type="button" class="btn btn-lg btn-primary">New</button>
+<div id="ranges">
+
+<input id="gBlur" value="2"   type="range" min="0" max="10" step="1" oninput="detectFeatures(gBlur.value,lowThresh.value,highThresh.value)" />
+<input id="lowThresh" value="40" type="range" min="0" max="100" step="2" oninput="detectFeatures(gBlur.value,lowThresh.value,highThresh.value)"/>
+<input id="highThresh" value="100" type="range" min="0" max="100" step="2" oninput="detectFeatures(gBlur.value,lowThresh.value,highThresh.value)"/>
 </div>
+
 
 
 
@@ -52,12 +60,12 @@
 		<input type="file" id='imageLoader' name="imageLoader" >
 </span>
 
-<div id="canvasDiv" >
 	<canvas id="imageCanvas"></canvas>
 	<canvas id="editCanvas"></canvas>
 </div>
 
 	<script src="main.js"></script>
+	<script src = "slider/js/bootstrap-slider.js"></script>
 	<script type="text/javascript" src= "js/jsfeat/jsfeat.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat/jsfeat_bbf.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat/jsfeat_cache.js"> </script>
