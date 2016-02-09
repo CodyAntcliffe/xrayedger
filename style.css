@@ -2,6 +2,18 @@
 body{
     background: #333;
 }
+
+
+#lowThresh,#highThresh,#gBlur{
+    width:30%;
+    margin-left:1%;
+    margin-top:1%;
+}
+
+#ranges{
+    visibility: hidden;
+}
+
 #imageCanvas {
 
     margin-left: 1%;
@@ -125,7 +137,12 @@ body{
     visibility: hidden;
     margin-top: 1%;
     margin-left:1%;
+    margin-bottom: 1%;
 }
 
 
 
+
+#ex1Slider .slider-selection {
+    background: #BABABA;
+}

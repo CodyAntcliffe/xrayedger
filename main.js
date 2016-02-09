@@ -30,11 +30,11 @@ function uploadImage(e) {
         originalImage = img;
     }
     reader.readAsDataURL(e.target.files[0]);
-    removeDummy();
+    showButtons();
 }
 
 //Used for removing something
-function removeDummy() {
+function showButtons() {
     var elem = document.getElementById('uploadImage');
     elem.remove(elem);
     elem = document.getElementById('newImage');
@@ -47,14 +47,14 @@ function removeDummy() {
     elem.style.visibility = "visible";
     elem = document.getElementById('Zoom');
     elem.style.visibility = "visible";
- 
+
 
 }
 
 //Reloads the entire page
 function addNewImageButton() {
 
-document.location.href = "index.html";
+    document.location.href = "index.html";
 
     location.reload();
 
@@ -66,7 +66,7 @@ comp.addEventListener('click', compareImage, false);
 //Toggle-able compare 
 function compareImage() {
     var elem = document.getElementById('editCanvas');
-    if(elem.style.visibility == "hidden")
+    if (elem.style.visibility == "hidden")
         elem.style.visibility = "visible";
     else
         elem.style.visibility = "hidden";
@@ -89,52 +89,146 @@ var saveAs = function() {
 }
 document.getElementById('Save').addEventListener('click', saveAs, false);
 
-
-function detectFeatures(){
+function scharr() {
     //Get the dimensions of the photo currently on the canvas
-    var width = canvas.width; 
+    var width = canvas.width;
     var height = canvas.height;
 
     var data_type = jsfeat.U8_t | jsfeat.C1_t;
     var img = originalImage;
-    
-    ctx.drawImage(img, 0, 0, width, height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(img, 0, 0);
 
-    var data_buffer = new jsfeat.data_t(width*height);
+    var imageData = ctx.getImageData(0, 0, width, height);
+
+    img_u8 = new jsfeat.matrix_t(width, height, jsfeat.U8C1_t);
+    img_gxgy = new jsfeat.matrix_t(width, height, jsfeat.S32C2_t);
+
+    //process the image
+    jsfeat.imgproc.grayscale(imageData.data, width, height, img_u8);
+    jsfeat.imgproc.scharr_derivatives(img_u8, img_gxgy);
+
+    // render result back to canvas
+    var data_u32 = new Uint32Array(imageData.data.buffer);
+    var alpha = (0xff << 24);
+    var i = img_u8.cols * img_u8.rows,
+        pix = 0,
+        gx = 0,
+        gy = 0;
+    while (--i >= 0) {
+        gx = Math.abs(img_gxgy.data[i << 1] >> 2) & 0xff;
+        gy = Math.abs(img_gxgy.data[(i << 1) + 1] >> 2) & 0xff;
+        pix = ((gx + gy) >> 2) & 0xff;
+        data_u32[i] = (pix << 24) | (gx << 16) | (0 << 8) | gy;
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+
+}
+
+function sobel() {
+    //Get the dimensions of the photo currently on the canvas
+    var width = canvas.width;
+    var height = canvas.height;
+
+    var data_type = jsfeat.U8_t | jsfeat.C1_t;
+    var img = originalImage;
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(img, 0, 0);
+
+    var imageData = ctx.getImageData(0, 0, width, height);
+
+    img_u8 = new jsfeat.matrix_t(width, height, jsfeat.U8C1_t);
+    img_gxgy = new jsfeat.matrix_t(height, height, jsfeat.S32C2_t);
+
+    //process the image
+    jsfeat.imgproc.grayscale(imageData.data, width, height, img_u8);
+    jsfeat.imgproc.sobel_derivatives(img_u8, img_gxgy);
+
+    // render result back to canvas
+    var data_u32 = new Uint32Array(imageData.data.buffer);
+    var alpha = (0xff << 24);
+    var i = img_u8.cols * img_u8.rows,
+        pix = 0,
+        gx = 0,
+        gy = 0;
+    while (--i >= 0) {
+        gx = Math.abs(img_gxgy.data[i << 1] >> 2) & 0xff;
+        gy = Math.abs(img_gxgy.data[(i << 1) + 1] >> 2) & 0xff;
+        pix = ((gx + gy) >> 1) & 0xff;
+        data_u32[i] = (pix << 24) | (gx << 16) | (0 << 8) | gy;
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+
+}
+
+function canny(b, l, h) {
+    document.getElementById('ranges').style.visibility = "visible";
+
+    //Get the dimensions of the photo currently on the canvas
+    var width = canvas.width;
+    var height = canvas.height;
+
+    var data_type = jsfeat.U8_t | jsfeat.C1_t;
+    var img = originalImage;
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(img, 0, 0);
+
+    var data_buffer = new jsfeat.data_t(width * height);
     var img_u8 = new jsfeat.matrix_t(width, height, data_type, data_buffer);
     var imageData = ctx.getImageData(0, 0, width, height);
+    console.log(imageData);
 
     //Convert to grascale(needed for other methods)
     jsfeat.imgproc.grayscale(imageData.data, width, height, img_u8);
 
     //Control level of detail in edge detection
-    var blurLevel = 2;
-    var lowThreshold = 20;
-    var highThreshhold = 70;
+
+    var blurLevel;
+    var lowThreshold;
+    var highThreshhold;
+
+    if (b == undefined)
+        blurLevel = 2;
+    else
+        blurLebel = b;
+    if (l == undefined)
+        lowThreshold = 40;
+    else
+        lowThreshold = l;
+    if (h == undefined)
+        highThreshhold = 100;
+    else
+        highThreshhold = h;
+
+
 
     //Gaussian Blur to reduce noise
-    var r = blurLevel|0;
-    var kernel_size = (r+1) << 1;
+    var r = blurLevel | 0;
+    var kernel_size = (r + 1) << 1;
     jsfeat.imgproc.gaussian_blur(img_u8, img_u8, kernel_size, 0);
 
     //Reduce image to edges
-    jsfeat.imgproc.canny(img_u8, img_u8, lowThreshold|0, highThreshhold|0);
+    jsfeat.imgproc.canny(img_u8, img_u8, lowThreshold | 0, highThreshhold | 0);
 
     //Render the image data back to canvas
     var data_u32 = new Uint32Array(imageData.data.buffer);
     var alpha = (0xff << 24);
-    var i = img_u8.cols*img_u8.rows, pix = 0;
-    while(--i >= 0) {
-            pix = img_u8.data[i];
-            data_u32[i] = alpha | (pix << 16) | (pix << 8) | pix;
+    var i = img_u8.cols * img_u8.rows,
+        pix = 0;
+    while (--i >= 0) {
+        pix = img_u8.data[i];
+        data_u32[i] = alpha | (pix << 16) | (pix << 8) | pix;
     }
 
     //Put the edited image on the canvas
     ctx.putImageData(imageData, 0, 0);
-
 }
 
-document.getElementById('EdgeButton').addEventListener('click',detectFeatures,false);
+
+
+//document.getElementById('EdgeButton').addEventListener('click',detectFeatures,false);
 
 //TODO
 /*
