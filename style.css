@@ -24,6 +24,7 @@ body{
     height: 100%;
     visibility: hidden;
     border: 5px inset black;
+    background: #FFF;
 
 }
 #editCanvas {
