@@ -75,8 +75,17 @@ function compareImage() {
 
 //Save function
 var saveAs = function() {
-    var fileName = "X-RayEdgerDemo";
+    var fileName = prompt("Enter A File Name and Press OK to Save");
     if (fileName != null) {
+        //store the current globalCompositeOperation
+        var compositeOperation = ctx.globalCompositeOperation;
+        //set to draw behind current content
+        ctx.globalCompositeOperation = "destination-over";
+        //set background color
+        ctx.fillStyle = 'white';
+
+        //draw background / rect on entire canvas
+        ctx.fillRect(0,0,canvas.width,canvas.height);
         var img = canvas.toDataURL("image/png");
         var a = document.createElement('a');
         a.href = img;
@@ -84,6 +93,7 @@ var saveAs = function() {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+
     }
 
 }
