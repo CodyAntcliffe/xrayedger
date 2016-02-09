@@ -23,6 +23,7 @@ body{
     width: 98%;
     height: 100%;
     visibility: hidden;
+    background:#FFF;
     border: 5px inset black;
 
 }
