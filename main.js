@@ -102,6 +102,28 @@ var saveAs = function() {
         }
     });
 
+    var fileName = prompt("Enter A File Name and Press OK to Save");
+    if (fileName != null) {
+        //store the current globalCompositeOperation
+        var compositeOperation = ctx.globalCompositeOperation;
+        //set to draw behind current content
+        ctx.globalCompositeOperation = "destination-over";
+        //set background color
+        ctx.fillStyle = 'white';
+
+        //draw background / rect on entire canvas
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        var img = canvas.toDataURL("image/png");
+        var a = document.createElement('a');
+        a.href = img;
+        a.download = fileName + ".png";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+    }
+
+
 }
 
 document.getElementById('Save').addEventListener('click', saveAs, false);
@@ -255,100 +277,3 @@ function tagger() {
     document.getElementById("myImage").style.border = "5px inset black";
 
   } 
-
-
-// /* Starting work for getting positions */
-
-// // var start = [];
-// // var end = [];
-// // function getCursorPosition(canvas,event) {
-// //    var x = event.cientX;
-// //    console.log(x);
-// //    var y = event.pageY-canvas.offsetTop;
-// //     return [x,y];
-// // }
-// // //Gets coordinates when mouse button down
-// // function setStart(event){
-// //     start = getCursorPosition(imageCanvas,event);
-// // }
-// // //Gets coordinates when mouse button released
-// // function setEnd(event){
-// //     end = getCursorPosition(imageCanvas,event);
-// // }
-// // //imageCanvas.addEventListener('mousedown]', setStart);
-// // imageCanvas.addEventListener('click', drawLine);
-
-// //  function drawLine(event){
-
-// // console.log(event.pageX-imageCanvas.offsetLeft);
-
-
-// //  }
-
-
-// // console.log(imageCanvas.offsetLeft);
-
-
-
-// /* 
-//     ANNOTATIONS AND TAGS
-// */
-
-// //Click on a section of the photo, and it adds a tag.  
-// //A text input dialog box appears and allows user to input info for the text.
-// //Click the annotation tag expands to show the text
-
-// //Annotation class
-// //Object constructor for annotations
-//     function annotation(position, data) {
-
-//         this.tagPos = position; //[x,y] cooridinate of the tag
-//         this.data = data; //The message
-//         console.log("Annotation created!");
-//     }
-
-//     var tags = []; //Holds all annotations
-//     var tagCount = 0;//Tracks how many tags we have 
-
-//     //Get cursor/click position
-//     var getXY = function(event){
-//         var currentX = event.clientX-canvas.offsetLeft;
-//         var currentY = event.clientY-canvas.offsetTop;  
-//         console.log([currentX,currentY]);
-//         return [currentX,currentY];
-//     }
-
-//     //Create tag when clicked 
-//     function createTag(event){
-
-//         //Pass the new 
-//         var newTag = new annotation(getXY(event));
-//         //add the new tag to the list of tags
-//         tags[count] = newTag;
-//         //increase tag counter
-//         count++;
-//     }
-
-
-
-//     function testTag(){
-//         console.log(tags[count].data);
-//         count++;
-//     }
-
-
-
-
-
-//     imageCanvas.addEventListener('click',drawTest);
-//    // testTag();
-
-
-//    //DRAWS THE ANNOTATION TAG SYMBOL
-//    function drawTag(){
-//     var pos = getXY();
-//         var rect= [50,50,50,50];
-//                 ctx.fillRect(rect[0],rect[1],rect[2],rect[3]);
-//                 ctx.strokeRect(rect[0],rect[1],rect[2],rect[3]);
-//    }
-
