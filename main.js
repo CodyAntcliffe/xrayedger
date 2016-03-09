@@ -13,6 +13,7 @@ newImage.addEventListener('click', addNewImageButton, false);
 var originalImage;
 
 function uploadImage(e) {
+    
     var reader = new FileReader();
     reader.onload = function(event) {
         var img = new Image();
@@ -23,14 +24,15 @@ function uploadImage(e) {
             canvasy.width = img.width;
             canvasy.height = img.height;
             ctxy.drawImage(img, 0, 0);
-            canvas.style.visibility = "visible";
             canvasy.style.visibility = "hidden";
+            tagger();
+            showButtons();
         }
         img.src = event.target.result;
         originalImage = img;
     }
     reader.readAsDataURL(e.target.files[0]);
-    showButtons();
+    
 }
 
 //Used for removing something
@@ -47,7 +49,6 @@ function showButtons() {
     elem.style.visibility = "visible";
     elem = document.getElementById('Zoom');
     elem.style.visibility = "visible";
-
 
 }
 
@@ -72,21 +73,37 @@ function compareImage() {
         elem.style.visibility = "hidden";
 }
 
-
 //Save function
 var saveAs = function() {
-    var fileName = "X-RayEdgerDemo";
-    if (fileName != null) {
-        var img = canvas.toDataURL("image/png");
-        var a = document.createElement('a');
-        a.href = img;
-        a.download = fileName + ".png";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
+    //Open a prompt for choosing file name
+    bootbox.prompt("Choose A Name For The Image", function(result) {
+        if (result === null) {
+
+        } else {
+            //Need to save backgroudn color information since sobel and scharr need white.
+
+            //store the current globalCompositeOperation
+            var compositeOperation = ctx.globalCompositeOperation;
+            //set to draw behind current content
+            ctx.globalCompositeOperation = "destination-over";
+            //set background color
+            ctx.fillStyle = 'white';
+            //draw background / rect on entire canvas
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            //Now save the entire image
+            var img = canvas.toDataURL("image/png");
+            var a = document.createElement('a');
+            a.href = img;
+            a.download = result + ".png";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    });
 
 }
+
 document.getElementById('Save').addEventListener('click', saveAs, false);
 
 function scharr() {
@@ -123,8 +140,9 @@ function scharr() {
     }
 
     ctx.putImageData(imageData, 0, 0);
-
+    tagger();
 }
+
 
 function sobel() {
     //Get the dimensions of the photo currently on the canvas
@@ -160,6 +178,7 @@ function sobel() {
     }
 
     ctx.putImageData(imageData, 0, 0);
+    tagger();
 
 }
 
@@ -178,7 +197,6 @@ function canny(b, l, h) {
     var data_buffer = new jsfeat.data_t(width * height);
     var img_u8 = new jsfeat.matrix_t(width, height, data_type, data_buffer);
     var imageData = ctx.getImageData(0, 0, width, height);
-    console.log(imageData);
 
     //Convert to grascale(needed for other methods)
     jsfeat.imgproc.grayscale(imageData.data, width, height, img_u8);
@@ -203,7 +221,6 @@ function canny(b, l, h) {
         highThreshhold = h;
 
 
-
     //Gaussian Blur to reduce noise
     var r = blurLevel | 0;
     var kernel_size = (r + 1) << 1;
@@ -224,24 +241,114 @@ function canny(b, l, h) {
 
     //Put the edited image on the canvas
     ctx.putImageData(imageData, 0, 0);
+
+    tagger();
 }
 
 
+//This is a current workaround for the fact that all of the image processing requires a canvas element.
+//Gets the image from canvas, places it in the img element and then makes it annotatable.
+function tagger() {
+    var im = canvas.toDataURL();
+    document.getElementById("myImage").src = im;
+    anno.makeAnnotatable(document.getElementById('myImage'));
+    document.getElementById("myImage").style.border = "5px inset black";
 
-//document.getElementById('EdgeButton').addEventListener('click',detectFeatures,false);
+  } 
 
-//TODO
-/*
-Implement the ability to change level of detail (will change the three relevant variables and redraw)
-Android compatibility
-Annotations and tags
-Custom data structure for saving and loading. Likely stored in an XML format, which is obfuscated.
-Includes:
-    - imagedata.data for both original and edited versions
-    - All annotations created, any other notes etc.
-Could then begin to extend this to a real web app, complete with log-in credentials and database for storing these files.
 
-Zoom ability.
-Cropping?
+// /* Starting work for getting positions */
 
-*/
+// // var start = [];
+// // var end = [];
+// // function getCursorPosition(canvas,event) {
+// //    var x = event.cientX;
+// //    console.log(x);
+// //    var y = event.pageY-canvas.offsetTop;
+// //     return [x,y];
+// // }
+// // //Gets coordinates when mouse button down
+// // function setStart(event){
+// //     start = getCursorPosition(imageCanvas,event);
+// // }
+// // //Gets coordinates when mouse button released
+// // function setEnd(event){
+// //     end = getCursorPosition(imageCanvas,event);
+// // }
+// // //imageCanvas.addEventListener('mousedown]', setStart);
+// // imageCanvas.addEventListener('click', drawLine);
+
+// //  function drawLine(event){
+
+// // console.log(event.pageX-imageCanvas.offsetLeft);
+
+
+// //  }
+
+
+// // console.log(imageCanvas.offsetLeft);
+
+
+
+// /* 
+//     ANNOTATIONS AND TAGS
+// */
+
+// //Click on a section of the photo, and it adds a tag.  
+// //A text input dialog box appears and allows user to input info for the text.
+// //Click the annotation tag expands to show the text
+
+// //Annotation class
+// //Object constructor for annotations
+//     function annotation(position, data) {
+
+//         this.tagPos = position; //[x,y] cooridinate of the tag
+//         this.data = data; //The message
+//         console.log("Annotation created!");
+//     }
+
+//     var tags = []; //Holds all annotations
+//     var tagCount = 0;//Tracks how many tags we have 
+
+//     //Get cursor/click position
+//     var getXY = function(event){
+//         var currentX = event.clientX-canvas.offsetLeft;
+//         var currentY = event.clientY-canvas.offsetTop;  
+//         console.log([currentX,currentY]);
+//         return [currentX,currentY];
+//     }
+
+//     //Create tag when clicked 
+//     function createTag(event){
+
+//         //Pass the new 
+//         var newTag = new annotation(getXY(event));
+//         //add the new tag to the list of tags
+//         tags[count] = newTag;
+//         //increase tag counter
+//         count++;
+//     }
+
+
+
+//     function testTag(){
+//         console.log(tags[count].data);
+//         count++;
+//     }
+
+
+
+
+
+//     imageCanvas.addEventListener('click',drawTest);
+//    // testTag();
+
+
+//    //DRAWS THE ANNOTATION TAG SYMBOL
+//    function drawTag(){
+//     var pos = getXY();
+//         var rect= [50,50,50,50];
+//                 ctx.fillRect(rect[0],rect[1],rect[2],rect[3]);
+//                 ctx.strokeRect(rect[0],rect[1],rect[2],rect[3]);
+//    }
+

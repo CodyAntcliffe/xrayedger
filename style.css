@@ -1,9 +1,16 @@
 
 body{
-    background: #333;
+    background: #FFF;
 }
 
+#myImage{
+    margin-left: 1%;
+    margin-right: none;
+    margin-top:1%;
+    width:99%;
+   
 
+}
 #lowThresh,#highThresh,#gBlur{
     width:30%;
     margin-left:1%;
@@ -15,28 +22,18 @@ body{
 }
 
 #imageCanvas {
-
-    margin-left: 1%;
-    margin-right: none;
-    margin-top:2%;
-    display: block;
-    width: 98%;
-    height: 100%;
-    visibility: hidden;
-    background:#FFF;
-    border: 5px inset black;
-
+   visibility: hidden;
+   width:0%;
+   border: 5px inset black;
+   
 }
-#editCanvas {
 
-    margin-left: 1%;
-    margin-right: none;
-    margin-top:1%;
+#editCanvas {
     display: block;
+    margin-left: 1%;
     width: 98%;
-    height: 100%;
     visibility:hidden;
-    border: 5px inset black;
+ border: 5px inset black;
     margin-bottom: 5%;
 }
 

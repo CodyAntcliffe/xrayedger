@@ -10,9 +10,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="annotorious-0.6.4/css/annotorious.css" />
+	<script type="text/javascript" src="annotorious-0.6.4/annotorious.min.js"></script>
 </head>
-<body >
-	
+<body>
+
 <!--
 	Create the Image Select button 
 -->
@@ -31,28 +33,27 @@
        <button title="Select A New Image" id="newImage" type="button" class="btn btn-lg btn-primary">New</button>
 </div>
 </div>
-     
-               
- 
+
+
+
 
 <div id="ranges">
 
-<input id="gBlur" value="2"   type="range" min="0" max="10" step="1" oninput="detectFeatures(gBlur.value,lowThresh.value,highThresh.value)" />
-<input id="lowThresh" value="40" type="range" min="0" max="100" step="2" oninput="detectFeatures(gBlur.value,lowThresh.value,highThresh.value)"/>
-<input id="highThresh" value="100" type="range" min="0" max="100" step="2" oninput="detectFeatures(gBlur.value,lowThresh.value,highThresh.value)"/>
+<input id="gBlur" value="2"   type="range" min="1" max="3" step="1"/>
+<input id="lowThresh" value="40" type="range" min="0" max="100" step="2"/>
+<input id="highThresh" value="70" type="range" min="0" max="100" step="2"/>
 </div>
-
-
-
 
 <span id="uploadImage" class="myButton btn-success fileinput-button">
 		<span>Select Image</span>
 		<input type="file" id='imageLoader' name="imageLoader" >
 </span>
+<img id="myImage"/>
+<canvas id="imageCanvas"></canvas>
+   
+<canvas id="editCanvas"></canvas>
+	
 
-	<canvas id="imageCanvas"></canvas>
-	<canvas id="editCanvas"></canvas>
-</div>
 
 	<script src="main.js"></script>
 	<script src = "slider/js/bootstrap-slider.js"></script>
@@ -75,6 +76,9 @@
 	<script type="text/javascript" src: "js/jsfeat/jsfeat_yape.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat/jsfeat_yape06.js"> </script>
 	<script type="text/javascript" src: "js/jsfeat/jsfeat-min.js"> </script>
+
+	<!-- for stylised prompt -->
+	<script src="js/bootbox/bootbox.min.js"></script>
 
 </body>
 </html>
