@@ -37,6 +37,7 @@ function uploadImage(e) {
 
 //Used for removing something
 function showButtons() {
+    document.getElementById('buttonHolder').style.visibility = "visible";
     var elem = document.getElementById('uploadImage');
     elem.remove(elem);
     elem = document.getElementById('newImage');
@@ -47,8 +48,7 @@ function showButtons() {
     elem.style.visibility = "visible";
     elem = document.getElementById('Compare');
     elem.style.visibility = "visible";
-    elem = document.getElementById('Zoom');
-    elem.style.visibility = "visible";
+   
 
 }
 
@@ -56,9 +56,7 @@ function showButtons() {
 function addNewImageButton() {
 
     document.location.href = "index.html";
-
     location.reload();
-
 }
 
 var comp = document.getElementById('Compare');
@@ -101,34 +99,16 @@ var saveAs = function() {
             document.body.removeChild(a);
         }
     });
-
-    var fileName = prompt("Enter A File Name and Press OK to Save");
-    if (fileName != null) {
-        //store the current globalCompositeOperation
-        var compositeOperation = ctx.globalCompositeOperation;
-        //set to draw behind current content
-        ctx.globalCompositeOperation = "destination-over";
-        //set background color
-        ctx.fillStyle = 'white';
-
-        //draw background / rect on entire canvas
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        var img = canvas.toDataURL("image/png");
-        var a = document.createElement('a');
-        a.href = img;
-        a.download = fileName + ".png";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-    }
-
-
 }
 
+function loading(){
+    document.getElementById('loadingPrompt').style.visibility = "visible";
+}
 document.getElementById('Save').addEventListener('click', saveAs, false);
 
 function scharr() {
+    
+    loading();
     //Get the dimensions of the photo currently on the canvas
     var width = canvas.width;
     var height = canvas.height;
@@ -163,10 +143,12 @@ function scharr() {
 
     ctx.putImageData(imageData, 0, 0);
     tagger();
+    //document.getElementById('loadingPrompt').style.visibility = "hidden";
 }
 
 
 function sobel() {
+    document.getElementById('loadingPrompt').style.visibility = "visible";
     //Get the dimensions of the photo currently on the canvas
     var width = canvas.width;
     var height = canvas.height;
@@ -205,7 +187,11 @@ function sobel() {
 }
 
 function canny(b, l, h) {
+   
     document.getElementById('ranges').style.visibility = "visible";
+    var start = new Date().getTime();
+
+
 
     //Get the dimensions of the photo currently on the canvas
     var width = canvas.width;
@@ -259,12 +245,18 @@ function canny(b, l, h) {
     while (--i >= 0) {
         pix = img_u8.data[i];
         data_u32[i] = alpha | (pix << 16) | (pix << 8) | pix;
-    }
 
+    }
     //Put the edited image on the canvas
     ctx.putImageData(imageData, 0, 0);
 
     tagger();
+    document.getElementById('loadingPrompt').style.visibility = "hidden";
+
+    //Get time elapsed by function
+    var end = new Date().getTime();
+    var time = end - start;
+    alert('Execution time: ' + time/1000 +' seconds.');
 }
 
 
@@ -274,6 +266,5 @@ function tagger() {
     var im = canvas.toDataURL();
     document.getElementById("myImage").src = im;
     anno.makeAnnotatable(document.getElementById('myImage'));
-    document.getElementById("myImage").style.border = "5px inset black";
 
   } 
